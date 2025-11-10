@@ -1,18 +1,8 @@
-import dotenv from "dotenv";
 import { WebSocketServer } from 'ws';
-import https from 'https';
 import { getAnimalGenerator } from './randomAnimal.js';
 
-dotenv.config();
-
-const credentials = {
-  key: process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
-  cert: process.env.CERTIFICATE.replace(/\\n/g, '\n')
-};
-
-const httpsServer = https.createServer(credentials);
-
-const wss = new WebSocketServer({ server: httpsServer });
+const PORT = 8080;
+const wss = new WebSocketServer({ port: PORT });
 
 const connections = [];
 
@@ -39,5 +29,3 @@ wss.on('connection', (ws) => {
   });
 
 });
-
-export default httpsServer;
