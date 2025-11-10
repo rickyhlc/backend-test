@@ -1,11 +1,13 @@
+import dotenv from "dotenv";
 import { WebSocketServer } from 'ws';
 import https from 'https';
-import fs from 'fs';
 import { getAnimalGenerator } from './randomAnimal.js';
 
+dotenv.config();
+
 const credentials = {
-  key: fs.readFileSync('./private.key', 'utf8'),
-  cert: fs.readFileSync('./certificate.crt', 'utf8')
+  key: Buffer.from(process.env.PRIVATE_KEY, 'base64').toString('utf8'),
+  cert: Buffer.from(process.env.CERTIFICATE, 'base64').toString('utf8')
 };
 
 const httpsServer = https.createServer(credentials);
