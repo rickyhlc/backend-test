@@ -4,8 +4,8 @@ import fs from 'fs';
 import { getAnimalGenerator } from './randomAnimal.js';
 
 const credentials = {
-  key: fs.readFileSync('private.key', 'utf8'),
-  cert: fs.readFileSync('certificate.crt', 'utf8')
+  key: fs.readFileSync('./', 'utf8'),
+  cert: fs.readFileSync('./certificate.crt', 'utf8')
 };
 
 const httpsServer = https.createServer(credentials);
