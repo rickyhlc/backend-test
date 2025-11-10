@@ -6,8 +6,8 @@ import { getAnimalGenerator } from './randomAnimal.js';
 dotenv.config();
 
 const credentials = {
-  key: Buffer.from(process.env.PRIVATE_KEY, 'base64').toString('utf8'),
-  cert: Buffer.from(process.env.CERTIFICATE, 'base64').toString('utf8')
+  key: process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
+  cert: process.env.CERTIFICATE.replace(/\\n/g, '\n')
 };
 
 const httpsServer = https.createServer(credentials);
