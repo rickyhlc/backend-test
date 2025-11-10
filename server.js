@@ -1,8 +1,16 @@
 import { WebSocketServer } from 'ws';
+import https from 'https';
+import fs from 'fs';
 import { getAnimalGenerator } from './randomAnimal.js';
 
-const PORT = 8080;
-const wss = new WebSocketServer({ port: PORT });
+const credentials = {
+  key: fs.readFileSync('private.key', 'utf8'),
+  cert: fs.readFileSync('certificate.crt', 'utf8')
+};
+
+const httpsServer = https.createServer(credentials);
+
+const wss = new WebSocketServer({ server: httpsServer });
 
 const connections = [];
 
